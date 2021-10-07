@@ -18,3 +18,4 @@ class Solution:
         self.d = dict()
         return self.count_entries(1) + self.count_entries(2) 
         
+# will search other solutions later from desc

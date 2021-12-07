@@ -39,3 +39,7 @@ class Solution:
                 result[index] = A[right] ** 2
                 right -= 1
         return result
+
+
+# beautiful answer with many algorithm suggetions:
+# https://leetcode.com/problems/squares-of-a-sorted-array/discuss/310865/Python%3A-A-comparison-of-lots-of-approaches!-Sorting-two-pointers-deque-iterator-generator

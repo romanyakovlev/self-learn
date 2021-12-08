@@ -50,3 +50,29 @@ class Solution:
             else:
                 already_seen.add(index)
                 index, new_value, counter = (index + k) % len(nums), old_value, counter - 1
+
+# better solution with space optimization (without set)
+
+
+class Solution:
+    
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        index, new_value = k % len(nums), nums[0]
+        counter = len(nums) - 1
+        last_start, start = 0, False
+        while counter >= 0:
+            old_value = nums[index]
+            nums[index] = new_value
+            if index == last_start and start:
+                index = (index + 1) % len(nums)
+                new_value = nums[index]
+                last_start = index
+                start = False
+            else:
+                index = (index + k) % len(nums)
+                new_value = old_value
+                counter -= 1
+                start = True

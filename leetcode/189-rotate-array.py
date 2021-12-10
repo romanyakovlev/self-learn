@@ -76,3 +76,6 @@ class Solution:
                 new_value = old_value
                 counter -= 1
                 start = True
+                
+# 4 diffenent solutions:
+# https://leetcode.com/problems/rotate-array/discuss/269948/4-solutions-in-python-(From-easy-to-hard)

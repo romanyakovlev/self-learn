@@ -25,14 +25,16 @@ class Solution:
                     index += 1
                     not_rotten.remove((x, y))
                 max_index = max(max_index, index)
-                if x - 1 >= 0 and (x - 1, y) not in grid_set:
+                if x - 1 >= 0 and (x - 1, y) not in grid_set and grid[x - 1][y] == 1:
                     q.put((index,  (x - 1, y), grid_set))
-                if x + 1 <= x_limit and (x + 1, y) not in grid_set:
+                if x + 1 <= x_limit and (x + 1, y) not in grid_set and grid[x + 1][y] == 1:
                     q.put((index,  (x + 1, y), grid_set))
-                if y - 1 >= 0 and (x, y - 1) not in grid_set:
+                if y - 1 >= 0 and (x, y - 1) not in grid_set and grid[x][y - 1] == 1:
                     q.put((index,  (x, y - 1), grid_set))
-                if y + 1 <= y_limit and (x, y + 1) not in grid_set:
+                if y + 1 <= y_limit and (x, y + 1) not in grid_set and grid[x][y + 1] == 1:
                     q.put((index,  (x, y + 1), grid_set))
         return - 1 if not_rotten else max_index
+        
+        
         
         

@@ -47,6 +47,37 @@ class Solution:
                 stop = True
         return result[0] if result else l1
 
+# recursion solution
+    
+class Solution:
+    def recurse(self, root, list1, list2):
+        if not root:
+            return None
+        if (list1 and list2) or (list1 and list1.next) or (list2 and list2.next):
+            root.next = ListNode()
+        if list1 and list2:
+            if list1.val <= list2.val:
+                root.val = list1.val
+                self.recurse(root.next, list1.next, list2)
+            else:
+                root.val = list2.val
+                self.recurse(root.next, list1, list2.next)
+        elif list1:
+            root.val = list1.val
+            self.recurse(root.next, list1.next, list2)
+        elif list2:
+            root.val = list2.val
+            self.recurse(root.next, list1, list2.next)
+    
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        if not list1 and not list2:
+            return None
+        root = ListNode()
+        self.recurse(root, list1, list2)
+        return root
+        
+            
+
 # algo with dummy node (from discussions)
 
 class Solution:

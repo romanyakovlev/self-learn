@@ -10,7 +10,6 @@ class Solution:
                 
     def permute(self, nums: List[int]) -> List[List[int]]:
         self.nums = nums
-        self.n_limit = len(nums)
         self.end_l = []
         l, i_s = [], {x for x in range(len(nums))}
         self.recurse(l, i_s)

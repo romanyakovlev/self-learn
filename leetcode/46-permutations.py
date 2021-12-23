@@ -12,8 +12,6 @@ class Solution:
         self.nums = nums
         self.n_limit = len(nums)
         self.end_l = []
-        i_s = {x for x in range(len(nums))}
-        for x in i_s:
-            self.recurse([self.nums[x]], i_s - {x})
+        l, i_s = [], {x for x in range(len(nums))}
+        self.recurse(l, i_s)
         return self.end_l
-

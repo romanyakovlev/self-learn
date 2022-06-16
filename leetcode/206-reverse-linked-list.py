@@ -1,4 +1,4 @@
-# recursion approach (easier to understand)
+# recursion approach (with object creation)
 
 class Solution(object):
     
@@ -35,5 +35,6 @@ class Solution:
             return head
         else:
             node, new_head = self.recurse(head.next)
-            head.next, node.next = None, head
+            node.next = head
+            head.next = None
             return new_head

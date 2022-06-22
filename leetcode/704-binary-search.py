@@ -22,7 +22,8 @@ class Solution:
         left, right = 0, len(nums) - 1
         return self.recurse(left, right, nums, target)
 
-# using iteration
+# using iteration - 1
+
 class Solution:
                                 
     def search(self, nums: List[int], target: int) -> int:
@@ -41,6 +42,27 @@ class Solution:
             else:
                 left = index + 1
  
+# using iteration - 2
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums) - 1
+        if l == r:
+            return 0 if nums[0] == target else -1
+        while l < r:
+            index = (r + l) // 2
+            if nums[index] > target:
+                r = index - 1
+            elif nums[index] < target:
+                l = index + 1
+            if nums[index] == target:
+                return index
+            elif nums[l] == target:
+                return l
+            elif nums[r] == target:
+                return r
+        return -1
+
 # solution from disc
 
 class Solution:
@@ -49,7 +71,6 @@ class Solution:
         high = len(nums) - 1
         while(low <= high):
             mid = int(low + (high - low)/2)
-            
             if nums[mid] == target:
                 return mid
             elif nums[mid] < target:

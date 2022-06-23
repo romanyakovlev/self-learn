@@ -47,9 +47,7 @@ class Solution:
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         l, r = 0, len(nums) - 1
-        if l == r:
-            return 0 if nums[0] == target else -1
-        while l < r:
+        while l <= r:
             index = (r + l) // 2
             if nums[index] > target:
                 r = index - 1
@@ -57,10 +55,6 @@ class Solution:
                 l = index + 1
             if nums[index] == target:
                 return index
-            elif nums[l] == target:
-                return l
-            elif nums[r] == target:
-                return r
         return -1
 
 # solution from disc

@@ -1,3 +1,5 @@
+# first solution
+
 class Solution:
     def findMin(self, nums: List[int]) -> int:
         l, r = 0, len(nums) - 1
@@ -18,3 +20,16 @@ class Solution:
             elif nums[l] <= nums[i] <= nums[r]:
                 r = i
         return nums[i]
+
+# solution from leetcode discussion (really beautiful)
+
+class Solution:
+    def findMin(self, num):
+        first, last = 0, len(num) - 1
+        while first < last:
+            midpoint = (first + last) // 2
+            if num[midpoint] > num[last]:
+                first = midpoint + 1
+            else:
+                last = midpoint
+        return num[first]

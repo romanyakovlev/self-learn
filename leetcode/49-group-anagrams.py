@@ -31,4 +31,4 @@ class Solution:
                 d[sorted_s] = [s]
             else:
                 d[sorted_s].append(s)
-        return list(d.values())
+        return d.values()

@@ -46,3 +46,9 @@ class Solution:
 
     def isAnagram(self, s: str, t: str) -> bool:
         return self.mergeSort(s) == self.mergeSort(t)
+
+# the fastet (cpython magic)
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return str(sorted(s)) == str(sorted(t))

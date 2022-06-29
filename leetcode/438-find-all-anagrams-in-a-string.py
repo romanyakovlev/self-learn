@@ -17,7 +17,7 @@ class Solution:
 
     def modifySlidingDict(self, i: int, d_s: dict, s: str, p: str) -> None:
         prev_i = i - 1
-        next_i = i + len(p) - 1
+        next_i = prev_i + len(p)
         d_s[s[prev_i]] -= 1
         if d_s[s[prev_i]] == 0:
             del d_s[s[prev_i]]

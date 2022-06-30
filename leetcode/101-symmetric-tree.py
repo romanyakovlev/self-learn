@@ -29,3 +29,22 @@ class Solution:
         elif p != q:
             self.same = False
         return self.same
+
+# second solution
+
+class Solution:
+
+    def recurse(self, left:  Optional[TreeNode], right:  Optional[TreeNode]) -> bool:
+        if left and right:
+            return (
+                self.recurse(left.left, right.right) and 
+                self.recurse(left.right, right.left) and
+                left.val == right.val
+            )
+        elif (not left and right) or (left and not right):
+            return False
+        else:
+            return True
+            
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        return self.recurse(root.left, root.right)

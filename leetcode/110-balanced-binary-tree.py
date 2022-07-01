@@ -10,7 +10,7 @@ class Solution:
         if root and root.left and root.right:
             left = self.get_depth(root.left, c + 1)
             right = self.get_depth(root.right, c + 1)
-            return max(left, right)
+            return left if left >= right else right
         elif root and root.left:
             return self.get_depth(root.left, c + 1)
         elif root and root.right:
@@ -20,19 +20,14 @@ class Solution:
     
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         if root and root.left and root.right:
-            left_val = self.get_depth(root.left, 1)
-            right_val = self.get_depth(root.right, 1)
-            left = self.isBalanced(root.left)
-            right = self.isBalanced(root.right)
-            return left and right and abs(left_val - right_val) <= 1
+            return (
+                self.isBalanced(root.left) and 
+                self.isBalanced(root.right) and 
+                abs(self.get_depth(root.left, 1) - self.get_depth(root.right, 1)) <= 1
+            )
         elif root and root.left:
-            left_val = self.get_depth(root.left, 1)
-            left = self.isBalanced(root.left)
-            return left and left_val <= 1
+            return self.isBalanced(root.left) and self.get_depth(root.left, 1) <= 1
         elif root and root.right:
-            right_val = self.get_depth(root.right, 1)
-            right = self.isBalanced(root.right)
-            return right and right_val <= 1
+            return self.isBalanced(root.right) and self.get_depth(root.right, 1) <= 1
         else:
             return True
-        

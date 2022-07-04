@@ -1,3 +1,5 @@
+# first solution
+
 class Solution:
     def merge_intervals(self, l):
         return [[min([x[0] for x in l]), max([x[1] for x in l])]]

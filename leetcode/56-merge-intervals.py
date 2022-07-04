@@ -1,5 +1,5 @@
 # first solution
-
+# use sorting with intervals merging
 class Solution:
     def merge_intervals(self, l):
         return [[min([x[0] for x in l]), max([x[1] for x in l])]]
@@ -26,7 +26,7 @@ class Solution:
             i += 1
         return True
             
-    def quick_sort(self, l):
+    def sort_intervals(self, l):
         if len(l) <= 1:
             return l
         l1, l2, l3 = [], [], []
@@ -38,10 +38,10 @@ class Solution:
                 l2.append(l[x])
             else:
                 l3.append(l[x])
-        result = self.quick_sort(l1) + self.merge_intervals(l3) + self.quick_sort(l2)
+        result = self.sort_intervals(l1) + self.merge_intervals(l3) + self.sort_intervals(l2)
         while not self.check_list(result):
             result = self.merge_with_equal_intervals(result)
         return result
     
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        return self.quick_sort(intervals)
+        return self.sort_intervals(intervals)

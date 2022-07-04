@@ -45,3 +45,6 @@ class Solution:
     
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         return self.sort_intervals(intervals)
+
+    
+# need to try quick sorting    

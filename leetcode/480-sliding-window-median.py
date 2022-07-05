@@ -52,7 +52,7 @@ class Solution:
         return result
             
             
-# better approach (with binary search)
+# better approach (with binary search) - much faster
 
 class Solution:
 

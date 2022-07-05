@@ -52,7 +52,7 @@ class Solution:
         return result
             
             
-# better approach (with binary search) - much faster
+# second solution - better approach (with binary search) - much faster
 
 class Solution:
 
@@ -106,3 +106,36 @@ class Solution:
             result.append(self.find_median(w))
             i += 1
         return result
+
+# third solution - standard module use
+
+class Solution:
+
+    def fill_window(self, l, k):
+        return sorted(l[:k])
+    
+    def find_median(self, w):
+        i = len(w) // 2
+        if len(w) % 2:
+            return w[i]
+        else:
+            return (w[i] + w[i - 1]) / 2
+    
+    def modify_window(self, l, w, i, k):
+        old_index = i - 1
+        new_index = old_index + k
+        w.remove(l[old_index])
+        bisect.insort(w, l[new_index])
+    
+    def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
+        i = 1
+        result = []
+        limit = len(nums) - k
+        w = self.fill_window(nums, k)
+        result.append(self.find_median(w))
+        while i <= limit:
+            self.modify_window(nums, w, i, k)
+            result.append(self.find_median(w))
+            i += 1
+        return result
+

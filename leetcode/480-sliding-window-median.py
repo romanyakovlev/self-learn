@@ -116,10 +116,7 @@ class Solution:
     
     def find_median(self, w):
         i = len(w) // 2
-        if len(w) % 2:
-            return w[i]
-        else:
-            return (w[i] + w[i - 1]) / 2
+        return w[i] if len(w) % 2 else (w[i] + w[i - 1]) / 2 
     
     def modify_window(self, l, w, i, k):
         old_index = i - 1
@@ -138,4 +135,3 @@ class Solution:
             result.append(self.find_median(w))
             i += 1
         return result
-

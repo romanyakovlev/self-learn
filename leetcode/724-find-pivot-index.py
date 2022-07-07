@@ -23,3 +23,26 @@ class Solution:
             if s1 == s2:
                 return j + 1
         return -1
+
+# solition from leetcode 
+
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        
+        # Initialization:
+        # Left hand side be empty, and
+        # Right hand side holds all weights.
+        total_weight_on_left, total_weight_on_right = 0, sum(nums)
+
+        for idx, current_weight in enumerate(nums):
+
+            total_weight_on_right -= current_weight
+
+            if total_weight_on_left == total_weight_on_right:
+                # balance is met on both sides
+                # i.e., sum( nums[ :idx] ) == sum( nums[idx+1: ] )
+                return idx
+
+            total_weight_on_left += current_weight
+
+        return -1

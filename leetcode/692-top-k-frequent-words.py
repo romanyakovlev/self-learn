@@ -2,12 +2,12 @@
 # first solution
 
 import heapq
+
 class Solution:
     
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
         d_c, d_w = {}, {}
         h, r = [], []
-        c = 0
         for w in words:
             d_c[w] = d_c.get(w, 0) + 1
         for w, w_c in d_c.items():
@@ -17,6 +17,5 @@ class Solution:
         while True:
             for w in sorted(heapq.heappop(h)[1]):
                 r.append(w)
-                c += 1
-                if c == k:
+                if len(r) == k:
                     return r

@@ -1,5 +1,5 @@
 
-# first solution
+# first solution (heapq and sorted)
 
 import heapq
 

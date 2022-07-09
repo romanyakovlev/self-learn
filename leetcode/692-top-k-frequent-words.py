@@ -7,7 +7,7 @@ class Solution:
     
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
         d_c, d_w = {}, {}
-        h, r = [], []
+        h, l = [], []
         for w in words:
             d_c[w] = d_c.get(w, 0) + 1
         for w, w_c in d_c.items():
@@ -16,6 +16,6 @@ class Solution:
             heapq.heappush(h, (-w_c, w_l))
         while True:
             for w in sorted(heapq.heappop(h)[1]):
-                r.append(w)
-                if len(r) == k:
-                    return r
+                l.append(w)
+                if len(l) == k:
+                    return l

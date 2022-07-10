@@ -10,3 +10,11 @@ class Solution:
         if f_n not in self.d.keys():
             self.d[n] = f_n
         return f_n
+
+# solution from leetcode 
+
+class Solution:
+    def fib(self, N: int) -> int:
+    	a, b = 0, 1
+    	for i in range(N): a, b = b, a + b
+    	return a

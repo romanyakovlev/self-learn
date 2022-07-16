@@ -28,13 +28,7 @@ class Solution:
                 del d[c1]
             for c2 in d.keys():
                 c3 = -(c1 + c2)
-                if c3 in d.keys():
-                    if c3 == c2:
-                        if len(d[c2]) != 1:
-                            s.add(tuple(sorted((c1, c2, c3))))
-                        else:
-                            continue
-                    else:
-                        s.add(tuple(sorted((c1, c2, c3))))
+                if c3 in d.keys() and not (c3 == c2 and len(d[c2]) == 1):
+                    s.add(tuple(sorted((c1, c2, c3))))
         return [list(x) for x in s]
 

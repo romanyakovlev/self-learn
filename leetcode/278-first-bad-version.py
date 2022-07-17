@@ -17,6 +17,19 @@ class Solution:
             else:
                 l  = index + 1
         return l if isBadVersion(l) else r
+
+# second
+
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        l, r, lbv = 0, n, n
+        while l < r:
+            i = (l + r) // 2
+            if isBadVersion(i):
+                r = lbv = i
+            else:
+                l = i + 1
+        return lbv
         
 # more simple and omptimized
 

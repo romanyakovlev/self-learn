@@ -56,3 +56,27 @@ class Solution:
                 left = right
             right += 1
         return max_profit
+
+# second solution from disc
+
+def maxProfit(prices):
+    max_profit, min_price = 0, float('inf')
+    for price in prices:
+        min_price = min(min_price, price)
+        profit = price - min_price
+        max_profit = max(max_profit, profit)
+    return max_profit
+
+# third
+
+# The heuristic is that as long as current price is higher than previous lowest price, 
+# max profit could be updated. So I use buy to track previous lowest price 
+# (indicating we can buy in that time) and ans to track max profit we have achieved so far.
+
+def maxProfit(prices):
+	buy, ans = float('inf'), 0
+	for p in prices:
+		buy, ans = min(buy, p), max(ans, p-buy)
+	return ans
+
+

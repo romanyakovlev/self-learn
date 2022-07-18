@@ -15,3 +15,26 @@ class Solution:
         self.recurse(root, 1)
         return self.l
         
+# using iteration
+
+class Solution:
+    
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        l = []
+        level_list = []
+        if root:
+            level_list.append(root)
+        while level_list:
+            temp_val = []
+            temp_list = []
+            for e in level_list:
+                # create level list with values - temp_val
+                temp_val.append(e.val)
+                # create next level - temp_list
+                if e.left:
+                    temp_list.append(e.left)
+                if e.right:
+                    temp_list.append(e.right)
+            l.append(temp_val)
+            level_list = temp_list
+        return l

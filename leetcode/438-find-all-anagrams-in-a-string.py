@@ -38,3 +38,24 @@ class Solution:
                 indexes_list.append(i)
             i += 1
         return indexes_list
+    
+# second solution (pretty same but shorter)
+
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        d_p, d, l = {}, {}, []
+        win_counter = 0
+        for c in p:
+            d_p[c] = d_p.get(c, 0) + 1
+        for i in range(len(s)):
+            d[s[i]] = d.get(s[i], 0) + 1
+            win_counter += 1
+            if win_counter == len(p):
+                win_index = i - win_counter + 1
+                if d == d_p:
+                    l.append(win_index)
+                d[s[win_index]] -= 1
+                if d[s[win_index]] == 0:
+                    del d[s[win_index]]
+                win_counter -= 1
+        return l

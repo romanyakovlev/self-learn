@@ -55,8 +55,8 @@ class Solution:
         win_counter = 0
         win_start = 0
         d = {}
-        for i in range(len(s)):
-            d[s[i]] = d.get(s[i], 0) + 1
+        for c in s:
+            d[c] = d.get(c, 0) + 1
             win_counter += 1
             start_win_char = s[win_start]
             full_win_counter = d[start_win_char] + k
@@ -70,4 +70,5 @@ class Solution:
                 full_win_counter = d[start_win_char] + k
             max_counter = max(max_counter, full_win_counter)
         return min(len(s), max_counter)
+
 

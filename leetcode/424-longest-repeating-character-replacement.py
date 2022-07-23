@@ -41,8 +41,8 @@ class Solution:
         return max_counter
 """
 
-# the idea is to create sliding window and expand it until full_window = d[s[win_start]] + k reaches 
-# the limit (in this case - full_window < win_counter) - that means we cannot get substring greater than this value
+# the idea is to create sliding window and expand it until full_win_counter = d[s[win_start]] + k reaches 
+# the limit (in this case - full_win_counter < win_counter) - that means we cannot get substring greater than this value
 # after that - window shrinks from left until full_window = d[s[win_start]] + k is true again.
 # repeat until the end of string.
 # need to add that d[s[win_start]] + k may be greater than string len because we can have case like this:
@@ -58,13 +58,16 @@ class Solution:
         for i in range(len(s)):
             d[s[i]] = d.get(s[i], 0) + 1
             win_counter += 1
-            full_win = d[s[win_start]] + k
-            while full_win < win_counter:
-                d[s[win_start]] -= 1
-                if d[s[win_start]] == 0:
-                    del d[s[win_start]]
+            start_win_char = s[win_start]
+            full_win_counter = d[start_win_char] + k
+            while full_win_counter < win_counter:
+                d[start_win_char] -= 1
+                if d[start_win_char] == 0:
+                    del d[start_win_char]
                 win_counter -= 1
                 win_start += 1
-                full_win = d[s[win_start]] + k
-            max_counter = max(max_counter, full_win)
+                start_win_char = s[win_start]
+                full_win_counter = d[start_win_char] + k
+            max_counter = max(max_counter, full_win_counter)
         return min(len(s), max_counter)
+

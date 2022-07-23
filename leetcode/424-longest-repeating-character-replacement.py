@@ -46,8 +46,8 @@ class Solution:
 # after that - window shrinks from left until full_window = d[s[win_start]] + k is true again.
 # repeat until the end of string.
 # need to add that d[s[win_start]] + k may be greater than string len because we can have case like this:
-# AAAB 2 - 2 here is k and that means are able to change not only B but other chars (AAA)
-# to prevent this we need to limit d[s[win_start]] + k as string len
+# AAAB 2 - 2 here is k and that means are able to change not only B but one other char (one from AAA)
+# since we dont need to change equal contiguous chars we need to limit d[s[win_start]] + k to string len
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:

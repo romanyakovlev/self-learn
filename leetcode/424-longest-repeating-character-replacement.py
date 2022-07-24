@@ -71,4 +71,18 @@ class Solution:
             max_counter = max(max_counter, full_win_counter)
         return min(len(s), max_counter)
 
+# approach from educative
 
+def length_of_longest_substring(str1, k):
+  freq_map = {}
+  max_freq_count = 0
+  max_count = 0
+  win_start = 0
+  for win_end in range(len(str1)):
+    freq_map[str1[win_end]] = freq_map.get(str1[win_end], 0) + 1
+    max_freq_count = max(max_freq_count, freq_map[str1[win_end]])
+    if (win_end - win_start + 1 - max_freq_count) > k:
+      freq_map[str1[win_start]] -= 1
+      win_start += 1
+    max_count = max(max_count, win_end - win_start + 1)
+  return max_count

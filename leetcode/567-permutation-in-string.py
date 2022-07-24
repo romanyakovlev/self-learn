@@ -18,3 +18,22 @@ class Solution:
                     del d[s2[left_win_index]]
                 win_count -= 1
         return False
+
+# second solution
+
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        d_s1, d_s2 = {}, {}
+        for c in s1:
+            d_s1[c] = d_s1.get(c, 0) + 1
+        win_start = 0
+        for win_end in range(len(s2)):
+            d_s2[s2[win_end]] = d_s2.get(s2[win_end], 0) + 1
+            if (win_end - win_start + 1) == len(s1):
+                if d_s2 == d_s1:
+                    return True
+                d_s2[s2[win_start]] -= 1
+                if d_s2[s2[win_start]] == 0:
+                    del d_s2[s2[win_start]]
+                win_start += 1
+        return False

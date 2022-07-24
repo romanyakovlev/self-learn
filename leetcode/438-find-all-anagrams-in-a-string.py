@@ -59,3 +59,28 @@ class Solution:
                     del d[s[win_index]]
                 win_counter -= 1
         return l
+
+# third solution
+
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        result_indexes = []
+        d = {}
+        for c in p:
+            d[c] = d.get(c, 0) + 1
+        win_start = 0
+        matched = 0
+        for win_end in range(len(s)):
+            if s[win_end] in d:
+                d[s[win_end]] -= 1
+                if d[s[win_end]] == 0:
+                    matched += 1
+            if matched == len(d):
+                result_indexes.append(win_start)
+            if (win_end - win_start + 1) == len(p):
+                if s[win_start] in d:
+                    if d[s[win_start]] == 0:
+                        matched -= 1
+                    d[s[win_start]] += 1
+                win_start += 1
+        return result_indexes

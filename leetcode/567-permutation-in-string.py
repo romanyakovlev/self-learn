@@ -38,7 +38,7 @@ class Solution:
                 win_start += 1
         return False
 
-# third solution - approach from educative    
+# third solution - approach from educative - the fastest
     
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:

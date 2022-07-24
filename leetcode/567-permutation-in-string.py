@@ -37,3 +37,27 @@ class Solution:
                     del d_s2[s2[win_start]]
                 win_start += 1
         return False
+
+# third solution - approach from educative    
+    
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        d = {}
+        for c in s1:
+            d[c] = d.get(c, 0) + 1
+        win_start, matched = 0, 0
+        for win_end in range(len(s2)):
+            if s2[win_end] in d:
+                d[s2[win_end]] -= 1
+                if d[s2[win_end]] == 0:
+                    matched += 1
+            if matched == len(d):
+                return True
+            if (win_end - win_start + 1) == len(s1):
+                if s2[win_start] in d:
+                    if d[s2[win_start]] == 0:
+                        matched -= 1
+                    d[s2[win_start]] += 1
+                win_start += 1
+        return False
+

@@ -37,25 +37,24 @@ class Solution:
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        str1, pattern = s, t
         d = {}
         for c in t:
             d[c] = d.get(c, 0) + 1
         matched = 0
         win_start = 0
-        min_str = str1 + str1[0]
+        min_str = s + s[0]
         # try to extend the range [window_start, window_end]
         for win_end in range(len(s)):
-            right_char = str1[win_end]
+            right_char = s[win_end]
             if right_char in d:
                 d[right_char] -= 1
                 if d[right_char] >= 0: # Count every matching of a character
                     matched += 1
             # Shrink the window if we can, finish as soon as we remove a matched character
-            while matched == len(pattern):
+            while matched == len(t):
                 if len(min_str) > win_end - win_start:
-                    min_str = str1[win_start:win_end + 1]
-                left_char = str1[win_start]
+                    min_str = s[win_start:win_end + 1]
+                left_char = s[win_start]
                 win_start += 1
                 if left_char in d:
                     # Note that we could have redundant matching characters, therefore we'll decrement the
@@ -63,6 +62,6 @@ class Solution:
                     if d[left_char] == 0:
                         matched -= 1
                     d[left_char] += 1
-        if len(min_str) > len(str1):
+        if len(min_str) > len(s):
             return ""
         return min_str

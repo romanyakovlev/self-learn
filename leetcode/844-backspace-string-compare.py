@@ -61,5 +61,35 @@ class Solution:
             ):
                 return False
         return True
-            
+ 
+# solution from leetcode
         
+class Solution:
+    def getNextValidCharIndex(self, s, i):
+        backspace = 0
+        while i >= 0:
+            if s[i] == '#':
+                backspace += 1
+            elif backspace > 0:
+                backspace -= 1
+            else:
+                break
+            i -= 1
+        return i
+    
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        index1, index2 = len(s) - 1, len(t) - 1
+        while index1 >= 0 or index2 >= 0:
+            i1 = self.getNextValidCharIndex(s, index1)
+            i2 = self.getNextValidCharIndex(t, index2)
+            if i1 < 0 and i2 < 0:
+                return True
+            elif i1 < 0 or i2 < 0:
+                return False
+            elif s[i1] != t[i2]:
+                return False
+            
+            index1 = i1 - 1
+            index2 = i2 - 1
+        return True
+

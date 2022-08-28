@@ -24,7 +24,7 @@ class Solution:
                 break
             right -= 1
         unsorted_min, unsorted_max = min(nums[left:right + 1]), max(nums[left:right + 1])
-        # find required items to sort from left and right
+        # find required items to sort from left and right and add them to unsorted list range
         while left != 0 and unsorted_max > nums[left - 1] and unsorted_min < nums[left - 1]:
             left -= 1
         while right != last_index and unsorted_max > nums[right + 1] and unsorted_min < nums[right + 1]:

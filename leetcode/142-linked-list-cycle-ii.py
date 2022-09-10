@@ -61,3 +61,19 @@ class Solution:
         cycle_node_set = self.createCycleNodeSet(target_node)
         start_cycle_node = self.getFirstCycleNode(start_node, cycle_node_set)
         return start_cycle_node
+
+# solution from discussion    
+
+def detectCycle(self, head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            break
+    else:
+        return None
+    while head != slow:
+        slow = slow.next
+        head = head.next
+    return head

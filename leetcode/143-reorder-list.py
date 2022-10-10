@@ -50,8 +50,7 @@ class Solution:
     # Splits in place a list in two halves, the first half is >= in size than the second.
     # @return A tuple containing the heads of the two halves
     def _splitList(self, head):
-        fast = head
-        slow = head
+        fast = slow = head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next

@@ -9,12 +9,12 @@ class Solution:
             prev, head = head, prev_next
         start.next = None
         return prev
-    
+
     def insertNodes(self, head, fast):
         while fast:
             prev_head, head.next, fast = head.next, fast, fast.next
             head.next.next, head = prev_head, prev_head
-    
+
     def reorderList(self, head: Optional[ListNode]) -> None:
         """
         Do not return anything, modify head in-place instead.
@@ -30,10 +30,11 @@ class Solution:
         self.insertNodes(head, head_reversed)
         return None
 
+
 # solution from disc
 
 class Solution:
-    
+
     # Merges in place two lists
     # @return The newly merged list.
     def _mergeLists(self, a, b):
@@ -46,7 +47,7 @@ class Solution:
             if a:
                 a, b = b, a
         return head
-    
+
     # Splits in place a list in two halves, the first half is >= in size than the second.
     # @return A tuple containing the heads of the two halves
     def _splitList(self, head):
@@ -61,14 +62,14 @@ class Solution:
     # Reverses in place a list.
     # @return Returns the head of the new reversed list
     def _reverseList(self, head):
-      last = None
-      currentNode = head
-      while currentNode:
-        nextNode = currentNode.next
-        currentNode.next = last
-        last = currentNode
-        currentNode = nextNode
-      return last
+        last = None
+        currentNode = head
+        while currentNode:
+            nextNode = currentNode.next
+            currentNode.next = last
+            last = currentNode
+            currentNode = nextNode
+        return last
 
     # @param head, a ListNode
     # @return nothing

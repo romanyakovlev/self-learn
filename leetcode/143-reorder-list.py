@@ -23,14 +23,12 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        if not head.next:
-            return None
-        if head.next and not head.next.next:
-            return None
         slow = fast = head
         while fast and fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
+        if fast is head:
+            return None
         head_reversed = self.reverseList(slow.next)
         slow.next = None
         self.insertNodes(head, head_reversed)

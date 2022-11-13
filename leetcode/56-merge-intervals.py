@@ -78,3 +78,18 @@ class Solution:
         while not self.check_list(result):
             result = self.merge_with_equal_intervals(result)
         return result
+
+
+# 3rd solution
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x:(x[0], x[1]))
+        result = [intervals[0]]
+        for interval in intervals[1:]:
+            if result[-1][1] < interval[0]:
+                result.append(interval)
+            else:
+                result[-1][1] = max(result[-1][1], interval[1])
+        return result
+

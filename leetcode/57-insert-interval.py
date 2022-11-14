@@ -19,7 +19,7 @@ class Solution:
         for i in range(len(intervals)):
             # 1. do not overlap, newInterval before intervals
             if intervals[i][0] > newInterval[1]:
-                return [newInterval] + intervals
+                intervals.insert(0, newInterval)
             # 2. do overlap
             elif intervals[i][0] >= newInterval[0] or intervals[i][1] >= newInterval[0]:
                 j = i
@@ -27,10 +27,14 @@ class Solution:
                     j += 1
                 intervals[i][0], intervals[i][1] = min(intervals[i][0], newInterval[0]), max(intervals[j][1], newInterval[1])
                 del intervals[i + 1:j + 1]
-                return intervals
             # 3. do not overlap, newInterval inside intervals
             elif i + 1 < len(intervals) and intervals[i][1] < newInterval[0] and newInterval[1] < intervals[i + 1][0]:
-                return intervals[:i + 1] + [newInterval] + intervals[i + 1:]
+                intervals.insert(i + 1, newInterval)
+            else:
+                continue
+            break
         else:
             # 4. do not overlap, newInterval after intervals
-            return intervals + [newInterval]
+            intervals.append(newInterval)
+        return intervals
+

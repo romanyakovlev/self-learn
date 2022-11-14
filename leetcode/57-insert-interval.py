@@ -11,3 +11,26 @@ class Solution:
             else:
                 result.append(interval)
         return result
+
+# 2nd
+
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:        
+        for i in range(len(intervals)):
+            # 1. do not overlap, newInterval before intervals
+            if intervals[i][0] > newInterval[1]:
+                return [newInterval] + intervals
+            # 2. do overlap
+            elif intervals[i][0] >= newInterval[0] or intervals[i][1] >= newInterval[0]:
+                j = i
+                while j + 1 < len(intervals) and intervals[j + 1][0] <= newInterval[1]:
+                    j += 1
+                intervals[i][0], intervals[i][1] = min(intervals[i][0], newInterval[0]), max(intervals[j][1], newInterval[1])
+                del intervals[i + 1:j + 1]
+                return intervals
+            # 3. do not overlap, newInterval inside intervals
+            elif i + 1 < len(intervals) and intervals[i][1] < newInterval[0] and newInterval[1] < intervals[i + 1][0]:
+                return intervals[:i + 1] + [newInterval] + intervals[i + 1:]
+        else:
+            # 4. do not overlap, newInterval after intervals
+            return intervals + [newInterval]

@@ -38,3 +38,28 @@ class Solution:
             node.next = head
             head.next = None
             return new_head
+
+# solution using In-place Reversal of a Linked List
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        prev, cur, next = None, head, head.next
+        while next:
+            cur.next = prev
+            prev, cur, next = cur, next, next.next
+        cur.next = prev
+        return cur
+
+# solution from disc
+
+class Solution:
+    def reverseList(self, head):
+        prev = None
+        while head:
+            curr = head
+            head = head.next
+            curr.next = prev
+            prev = curr
+        return prev

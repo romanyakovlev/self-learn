@@ -79,3 +79,22 @@ class Solution:
         a, b = self._splitList(head)
         b = self._reverseList(b)
         head = self._mergeLists(a, b)
+
+# 2nd solution
+
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        fast = slow = head
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+        middle, slow.next, prev = slow.next, None, None
+        while middle:
+            cur = middle
+            middle = middle.next
+            cur.next = prev
+            prev = cur
+        head_reversed = prev
+        while head_reversed:
+            cur1, cur2 = head.next, head_reversed.next
+            head.next, head_reversed.next = head_reversed, cur1
+            head, head_reversed = cur1, cur2

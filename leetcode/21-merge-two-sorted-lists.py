@@ -113,3 +113,22 @@ class Solution:
     
     def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         return self.getList(l1, l2)
+
+# 3rd solution
+
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = head = ListNode(0)
+        while list1 and list2:
+            if list1.val > list2.val:
+                list2, head.next = list2.next, list2
+            else:
+                list1, head.next = list1.next, list1
+            head = head.next
+        if list1:
+            head.next = list1
+        elif list2:
+            head.next = list2
+        return dummy.next
+
+

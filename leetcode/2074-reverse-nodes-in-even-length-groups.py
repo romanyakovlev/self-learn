@@ -30,3 +30,37 @@ class Solution:
         if cur_group_count != 0 and cur_group_count % 2 == 0:
             self.reverseCurrentGroup(prev_group_tail, cur_group_count)
         return dummy.next
+
+# 2nd solution (educative inspired)
+
+class Solution:
+    def reverseEvenLengthGroups(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # start from 2 because 1 is odd
+        group_count = 2
+        dummy = ListNode(next=head)
+        while head:
+            cur_group_count = 0
+            prev = head
+            # get group count (cur_group_count)
+            for _ in range(group_count):
+                if not head.next:
+                    break
+                cur_group_count += 1
+                head = head.next
+            # if group count is even - reverse it
+            if cur_group_count % 2 == 0:
+                cur = prev.next
+                reverse = head.next
+                # reverse even group (add nodes to head of the next group)
+                for _ in range(cur_group_count):
+                    next_cur = cur.next
+                    cur.next = reverse
+                    reverse = cur
+                    cur = next_cur
+                prev_next = prev.next
+                # connect prev group tail with current group head
+                prev.next = reverse
+                # set head as current group tail (group tail is prev_next)
+                head = prev_next
+            group_count += 1
+        return dummy.next

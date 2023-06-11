@@ -43,7 +43,6 @@ class MedianFinder:
             heappush(self.small, -heappushpop(self.large, num))
 
     def findMedian(self):
-        print(self.small, self.large)
         if len(self.small) == len(self.large):
             return float(self.large[0] - self.small[0]) / 2.0
         else:

@@ -136,7 +136,7 @@ class Solution:
             i += 1
         return result
 
-# 4th solution (using 2 heaps + sliding window)
+# 4th solution (using 2 heaps + hash table)
 
 from heapq import *
 

@@ -135,3 +135,91 @@ class Solution:
             result.append(self.find_median(w))
             i += 1
         return result
+
+# 4th solution (using 2 heaps + sliding window)
+
+from heapq import *
+
+class Solution:
+
+    def pop_empty_left(self):
+        while self.left_h and self.left_d[-self.left_h[0]] == 0:
+            del self.left_d[-self.left_h[0]]
+            heappop(self.left_h)
+    
+    def pop_empty_right(self):
+        while self.right_h and self.right_d[self.right_h[0]] == 0:
+            del self.right_d[self.right_h[0]]
+            heappop(self.right_h)
+
+    def push_to_left(self, val: int):
+        if val not in self.left_d:
+            self.left_d[val] = 1
+            heappush(self.left_h, -val)
+        else:
+            self.left_d[val] += 1
+        self.left_c += 1
+    
+    def push_to_right(self, val: int):
+        if val not in self.right_d:
+            self.right_d[val] = 1
+            heappush(self.right_h, val)
+        else:
+            self.right_d[val] += 1
+        self.right_c += 1
+
+    def pop_from_left(self):
+        val = -self.left_h[0]
+        self.left_d[val] -= 1
+        self.pop_empty_left()
+        self.left_c -= 1
+        return val
+
+    def pop_from_right(self):
+        val = self.right_h[0]
+        self.right_d[val] -= 1
+        self.pop_empty_right()
+        self.right_c -= 1
+        return val
+
+    def add_element(self, val: int):
+        if self.left_c == self.right_c:
+            self.push_to_left(val)
+            self.push_to_right(self.pop_from_left())
+        else:
+            self.push_to_right(val)
+            self.push_to_left(self.pop_from_right())
+
+    def get_median(self):
+        if self.left_c == self.right_c:
+            return (self.right_h[0] - self.left_h[0]) / 2
+        else:
+            return self.right_h[0]
+
+    def remove_element(self, val: int):
+        if val in self.left_d:
+            self.left_d[val] -= 1
+            self.pop_empty_left()
+            self.left_c -= 1
+        else:
+            self.right_d[val] -= 1
+            self.pop_empty_right()
+            self.right_c -= 1
+        if self.left_c - self.right_c == 1:
+            self.push_to_right(self.pop_from_left())
+        elif self.right_c - self.left_c == 2:
+            self.push_to_left(self.pop_from_right())
+
+    def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
+        self.left_d, self.right_d = dict(), dict()
+        self.left_h, self.right_h = list(), list()
+        self.left_c, self.right_c = 0, 0
+        self.medians = []
+        for i in range(k):
+            self.add_element(nums[i])
+        self.medians.append(self.get_median())
+        for i in range(k, len(nums)):
+            self.remove_element(nums[i - k])
+            self.add_element(nums[i])
+            self.medians.append(self.get_median())
+        return self.medians

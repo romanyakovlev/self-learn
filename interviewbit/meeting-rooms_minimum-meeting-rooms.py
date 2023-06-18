@@ -21,3 +21,20 @@ class Solution:
             heappush(heap, (room[1], room[0]))
             counter = max(counter, len(heap))
         return counter
+
+# 2nd solution
+
+from heapq import *
+
+class Solution:
+    def solve(self, A):
+        A.sort(key=lambda x: -x[0])
+        c = 1
+        h = []
+        while A:
+            x = A.pop()
+            while h and x[0] >= h[0]:
+                heappop(h)
+            heappush(h, x[1])
+            c = max(c, len(h))
+        return c

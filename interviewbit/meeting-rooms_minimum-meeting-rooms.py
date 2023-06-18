@@ -22,6 +22,13 @@ class Solution:
             counter = max(counter, len(heap))
         return counter
 
+"""
+example
+[0            30]  h is empty        => h = [30]
+  [10 20]          30 > 10           => h = [20, 30]
+         [20  30]  20 == 20, 30 > 20 => h = [30, 30]
+"""
+
 # 2nd solution
 
 from heapq import *

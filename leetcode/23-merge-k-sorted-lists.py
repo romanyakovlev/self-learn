@@ -47,3 +47,23 @@ class Solution:
             if len(lists_dict[min_i]) == 0:
                 lists_dict.pop(min_i)
         return start_node.next
+
+# 2nd solution (using k-way merge pattern)
+
+from heapq import *
+
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        dummy = head = ListNode()
+        h = []
+        for i in range(len(lists)):
+            if lists[i]:
+                heappush(h, (lists[i].val, i))
+        while h:
+            i = heappop(h)[1]
+            head.next = lists[i]
+            head = head.next
+            lists[i] = lists[i].next
+            if lists[i]:
+                heappush(h, (lists[i].val, i))
+        return dummy.next

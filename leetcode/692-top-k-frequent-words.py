@@ -19,3 +19,13 @@ class Solution:
                 l.append(w)
                 if len(l) == k:
                     return l
+
+
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        d, h = {}, []
+        for w in words:
+            d[w] = d.get(w, 0) + 1
+        for key, value in d.items():
+            heappush(h, (-value, key))
+        return [heappop(h)[1] for _ in range(k)]

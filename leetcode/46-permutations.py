@@ -14,3 +14,16 @@ class Solution:
         l, i_s = [], {x for x in range(len(nums))}
         self.recurse(l, i_s)
         return self.end_l
+
+class Solution:
+
+    def recurse(self, s, r):
+        if not s:
+            self.l.append(r)
+        for x in s:
+            self.recurse(s - {x}, r + [x])
+
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        self.l = []
+        self.recurse(set(nums), [])
+        return self.l
